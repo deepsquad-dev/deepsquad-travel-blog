@@ -1,0 +1,15 @@
+services:
+  app:
+    image: webdevops/php:8.4
+    working_dir: /app
+    ports:
+      - "8765:8765"
+    volumes:
+      - .:/app
+    environment:
+      DEBUG: "true"
+      APP_FULL_BASE_URL: "http://localhost:8765"
+    user: "1000:1000"
+    command: >
+      sh -c "php bin/cake.php migrations migrate
+      && php bin/cake.php server -H 0.0.0.0 -p 8765"

@@ -1,0 +1,9 @@
+# deepsquad
+/tmp/*
+!/tmp/empty
+/logs/*
+!/logs/empty
+/webroot/uploads/*
+!/webroot/uploads/.gitkeep
+/config/app_local.php
+/vendor/

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Run CakePHP CLI with local PHP + userland sqlite extensions.
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+EXT="$ROOT/tools/php-ext"
+export PHP_BINARY="${PHP_BINARY:-php}"
+exec "$PHP_BINARY" \
+  -d "extension=${EXT}/sqlite3.so" \
+  -d "extension=${EXT}/pdo_sqlite.so" \
+  "$ROOT/bin/cake.php" "$@"

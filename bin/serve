@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Serve deepsquad with host PHP + SQLite extensions loaded.
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+EXT="$ROOT/tools/php-ext"
+HOST="${1:-localhost}"
+PORT="${2:-8765}"
+export PHP_BINARY="${PHP_BINARY:-php}"
+
+exec "$PHP_BINARY" \
+  -d "extension=${EXT}/sqlite3.so" \
+  -d "extension=${EXT}/pdo_sqlite.so" \
+  -S "${HOST}:${PORT}" \
+  -t "$ROOT/webroot" \
+  "$ROOT/webroot/index.php"
